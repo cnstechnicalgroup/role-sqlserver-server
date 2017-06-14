@@ -6,7 +6,7 @@ This role installs and configures SQL Server, SQL Server Agent and Always-On Ava
 Requirements
 ------------
 
-centos7, passwordstore. 
+CentOS7. 
 
 Role Variables
 --------------
