@@ -1,10 +1,4 @@
 ---
-- name: Ensure MySQL installed
-  yum: name=mariadb-server state=present
-
-- name: Start MySQL
-  service: name=mariadb state=started 
-
 - name: Add epel repository
   yum_repository:
     name: epel
@@ -38,12 +32,6 @@
     state: enabled
     zone: public
   notify: restart-firewalld
-
-- name: Install expect
-  yum: name=expect
-
-- name: Install rsync 
-  yum: name=rsync
 
 - name: Check if sql server is running
   command: systemctl status mssql-server 
