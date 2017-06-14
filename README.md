@@ -1,12 +1,12 @@
 Role: role.sqlserver
 ========
 
-This role installs and configures SQL Server and SQL Server Agent.
+Ansible role install SQL Server, SQL Server Agent
 
 Requirements
 ------------
 
-CentOS7. 
+CentOS7 
 
 Role Variables
 --------------
