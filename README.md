@@ -6,7 +6,7 @@ Ansible role install SQL Server, SQL Server Agent
 Requirements
 ------------
 
-CentOS7 
+* CentOS7 
 
 Role Variables
 --------------
