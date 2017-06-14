@@ -38,8 +38,8 @@ Examples
 
 ```yaml
 ---
-- name: role.sqlserver role 
+- name: role.sqlserver-server role 
   hosts: all
   roles:
-    - role.sqlserver
+    - role.sqlserver-server
 ```
