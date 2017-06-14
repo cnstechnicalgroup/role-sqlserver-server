@@ -5,6 +5,7 @@ galaxy_info:
   company: CNS Technical Group, Inc.
   license: GPL2
   min_ansible_version: 2.3
-  categories:
+  galaxy_tags:
   - sqlserver
+  - database
 dependencies: []
