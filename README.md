@@ -1,7 +1,7 @@
 Role: role.sqlserver
 ========
 
-This role installs and configures SQL Server, SQL Server Agent and Always-On Availability Groups ReadOnly Scaling.
+This role installs and configures SQL Server and SQL Server Agent.
 
 Requirements
 ------------
