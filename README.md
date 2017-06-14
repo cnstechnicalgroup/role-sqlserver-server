@@ -31,7 +31,7 @@ GPLv2
 Author Information
 ------------------
 
-Created by CNS Technical Group (https://www.cnstechnicalgroup.com)
+Created by CNS Technical Group (https://www.cnstechgroup.com/)
 
 Examples
 --------
@@ -40,11 +40,11 @@ Examples
 ---
 - name: role.sqlserver-server role 
   hosts: dbservers
-  roles:
-    - role.sqlserver-server
-      environment:
-      SA_PASSWORD: "{{sa_password}}"
-      gather_facts: no
-      sudo: yes
+  sudo: yes
+  roles: 
+  - dbserver
+  gather_facts: no
+  environment:
+   SA_PASSWORD: "{{sa_password}}"
 
 ```
