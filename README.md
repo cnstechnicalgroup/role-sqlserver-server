@@ -39,7 +39,12 @@ Examples
 ```yaml
 ---
 - name: role.sqlserver-server role 
-  hosts: all
+  hosts: dbservers
   roles:
     - role.sqlserver-server
+      environment:
+      SA_PASSWORD: "{{sa_password}}"
+      gather_facts: no
+      sudo: yes
+
 ```
