@@ -42,9 +42,9 @@ Examples
   hosts: dbservers
   sudo: yes
   roles: 
-  - cns.role-sqlserver-server
+    - cns.role-sqlserver-server
   gather_facts: no
   environment:
-   SA_PASSWORD: "{{sa_password}}"
+    SA_PASSWORD: "{{sa_password}}"
 
 ```
