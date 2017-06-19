@@ -1,4 +1,4 @@
-Role: cns.sqlserver-server
+Role: cnstechnicalgroup.sqlserver-server
 ========
 
 Ansible role install SQL Server, SQL Server Agent
@@ -38,11 +38,11 @@ Examples
 
 ```yaml
 ---
-- name: cns.sqlserver-server role 
+- name: cnstechnicalgroup.sqlserver-server role 
   hosts: dbservers
   sudo: yes
   roles: 
-    - cns.sqlserver-server
+    - cnstechnicalgroup.sqlserver-server
   gather_facts: no
   environment:
     SA_PASSWORD: "{{sa_password}}"
