@@ -24,6 +24,7 @@
 
 - name: Enable firewalld
   service: name=firewalld state=started enabled=yes
+  when: testing is not defined
 
 - name: Enable enable 1433 on firewall 
   firewalld:
