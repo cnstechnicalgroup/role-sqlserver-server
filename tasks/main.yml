@@ -32,6 +32,7 @@
     state: enabled
     zone: public
   notify: restart-firewalld
+  when: testing is not defined
 
 - name: Check if sql server is running
   command: systemctl status mssql-server 
