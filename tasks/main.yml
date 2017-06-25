@@ -36,7 +36,7 @@
   when: testing is not defined
 
 - name: Check if sql server is running
-  shell: "systemctl status mssql-server  2>/dev/null"
+  shell: "systemctl status mssql-server  2>/dev/null || true"
   ignore_errors: True
   register: sqlserver_service
 
