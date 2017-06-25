@@ -44,7 +44,7 @@
 
 - name: Stop sql server if it was already running and initialized
   service: name=mssql-server state=stopped
-  when: sqlserver_service.stdout.find('running') == -1
+  when: sqlserver_service.stdout.find('running') == -1 and testing is not defined
     
 - name: Initial setup of sql server
   command: /opt/mssql/lib/mssql-conf/mssql-conf.py setup accept-eula
