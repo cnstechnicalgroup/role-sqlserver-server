@@ -19,6 +19,7 @@
 - name: Ensure mssql installed
   yum: name=mssql-server state=present
   register: sqlserver_service
+  when: testing is not defined
 
 - name: Ensure mssql agent installed
   yum: name=mssql-server-agent state=present
@@ -40,11 +41,12 @@
   command: systemctl status mssql-server 
   ignore_errors: True
   register: sqlserver_service
-  when: testing is not defined
 
 - name: Initial setup of sql server
   command: /opt/mssql/lib/mssql-conf/mssql-conf.py setup accept-eula
+  when: sqlserver_service.stdout.find('running') == -1
  
 - name: Start sql server
   service: name=mssql-server state=started enabled=yes
+  when: sqlserver_service.stdout.find('running') == -1
 
