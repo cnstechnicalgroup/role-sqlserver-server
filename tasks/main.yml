@@ -18,8 +18,6 @@
 
 - name: Ensure mssql installed
   yum: name=mssql-server state=present
-  register: sqlserver_service
-  when: testing is not defined
 
 - name: Ensure mssql agent installed
   yum: name=mssql-server-agent state=present
@@ -38,7 +36,7 @@
   when: testing is not defined
 
 - name: Check if sql server is running
-  command: systemctl status mssql-server 
+  shell: "systemctl status mssql-server  2>/dev/null"
   ignore_errors: True
   register: sqlserver_service
 
