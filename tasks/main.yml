@@ -5,8 +5,9 @@
     description: EPEL YUM repo
     baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
   notify: yum-clean-metadata
+  when:  ansible_os_family == "CentOS"
 
-- name: Add mssql repository
+- name: Add mssql repository CentOS
   yum_repository:
     name: packages-microsoft-com-mssql-server
     description: packages-microsoft-com-mssql-server
@@ -15,16 +16,48 @@
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
     gpgcheck: yes
   notify: yum-clean-metadata
+  when:  ansible_os_family == "CentOS"
+
+- name: Add mssql repository Ubuntu
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/ubuntu/16.04/mssql-server xenial main
+    state: present
+    filename: 'msprod.list'
+  when:  ansible_os_family == "Debian"
+
+- name: add apt_key for mssql-tools Ubuntu
+  apt_key:
+    url: "https://packages.microsoft.com/keys/microsoft.asc"
+    state: present
+  when:  ansible_os_family == "Debian"
 
 - name: Ensure mssql installed
   yum: name=mssql-server state=present
+  when:  ansible_os_family == "CentOS"
 
 - name: Ensure mssql agent installed
   yum: name=mssql-server-agent state=present
+  when:  ansible_os_family == "CentOS"
+
+- name: Install the package "mssql-server"
+  apt:
+    name: mssql-server
+    allow_unauthenticated: true
+    update_cache: yes
+    state: present
+  when:  ansible_os_family == "Debian"
+
+- name: Install the package "mssql-server-agent"
+  apt:
+    name: mssql-server-agent
+    allow_unauthenticated: true
+    update_cache: yes
+    state: present
+  when:  ansible_os_family == "Debian"
 
 - name: Enable firewalld
   service: name=firewalld state=started enabled=yes
-  when: testing is not defined
+  when:  ansible_os_family == "CentOS"
 
 - name: Enable enable 1433 on firewall 
   firewalld:
@@ -33,13 +66,17 @@
     state: enabled
     zone: public
   notify: restart-firewalld
-  when: testing is not defined
+  when:  ansible_os_family == "CentOS"
 
 - name: Check if sql server is running
   shell: "systemctl status mssql-server  2>/dev/null || true"
   ignore_errors: True
   register: sqlserver_service
 
+- name: Stop sql server if it was already running and initialized
+  service: name=mssql-server state=stopped
+  when: sqlserver_service.stdout.find('running') == -1
+    
 - name: Initial setup of sql server
   command: /opt/mssql/lib/mssql-conf/mssql-conf.py setup accept-eula
   when: sqlserver_service.stdout.find('running') == -1
@@ -47,4 +84,3 @@
 - name: Start sql server
   service: name=mssql-server state=started enabled=yes
   when: sqlserver_service.stdout.find('running') == -1
-
