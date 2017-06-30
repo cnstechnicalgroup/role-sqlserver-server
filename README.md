@@ -44,7 +44,7 @@ Examples
   sudo: yes
   roles: 
     - cnstechnicalgroup.sqlserver-server
-  gather_facts: no
+  gather_facts: yes
   environment:
     SA_PASSWORD: "{{sa_password}}"
 
