@@ -52,5 +52,7 @@ Examples
   gather_facts: yes
   environment:
     SA_PASSWORD: "{{sa_password}}"
+    ACCEPT_EULA: "Y"
+
 
 ```
