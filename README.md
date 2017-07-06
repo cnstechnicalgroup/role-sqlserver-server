@@ -24,6 +24,13 @@ Dependencies
 
 This package has no dependencies.
 
+
+Requirements
+------------
+
+The target server must have at least 4GB of available RAM. 
+
+
 License
 -------
 
